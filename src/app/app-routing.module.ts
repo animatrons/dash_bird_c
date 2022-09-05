@@ -23,6 +23,9 @@ const routes: Routes = [
   {
     path: 'news',
     loadChildren: () => import('./news/news.module').then(module => module.NewsModule)
+  },
+  { path: 'sign-up',
+    loadChildren: () => import('./signup/signup.module').then(m => m.SignupModule)
   }
 ];
 
