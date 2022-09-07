@@ -4,12 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { HomeComponent } from './home/home.component';
-import { NewsModule } from './news/news.module';
-import { ProfileModule } from './profile/profile.module';
+import { DashboardModule } from './views/dashboard/dashboard.module';
+import { HomeComponent } from './views/home/home.component';
+import { ProfileModule } from './views/profile/profile.module';
 import { SharedModule } from './shared/shared.module';
-import { SigninComponent } from './signin/signin.component';
+import { SigninComponent } from './views/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +22,7 @@ import { SigninComponent } from './signin/signin.component';
     CoreModule,
     SharedModule,
     ProfileModule,
-    DashboardModule,
-    NewsModule
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
