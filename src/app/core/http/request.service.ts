@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class RequestService {
-  private baseUrl = '';
+  private baseUrl = environment.baseUrl;
   constructor(private httpClient: HttpClient) {}
 
   get<T>(uri: string, requestDto?: HttpOptionsDTO) {
