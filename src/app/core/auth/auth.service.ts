@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { RequestService } from '../http/request.service';
 import { User } from '../models/User';
+import { PersistenceService } from '../services/persistence.service';
 
 @Injectable()
 export class AuthService {
   private loggedInUser: User | undefined;
   private tokenKey = 'access_token';
-  constructor(private httpService: RequestService) { }
+  constructor(private httpService: RequestService,
+    @Inject(PersistenceService) private persistenceService: PersistenceService) { }
 
   login() {
 
@@ -17,15 +19,15 @@ export class AuthService {
   }
 
   setToken(token: string) {
-    localStorage.setItem(this.tokenKey, token);
+    this.persistenceService.set(this.tokenKey, token);
   }
 
   getToken() {
-    return localStorage.getItem(this.tokenKey);
+    return this.persistenceService.get(this.tokenKey);
   }
 
   private destroyToken() {
-    localStorage.removeItem(this.tokenKey);
+    this.persistenceService.remove(this.tokenKey);
   }
 
   isUserLoggedIn() {
