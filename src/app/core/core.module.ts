@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './auth/auth.service';
 import { RequestService } from './http/request.service';
+import { PersistenceService } from './services/persistence.service';
 
 
 
@@ -12,7 +13,8 @@ import { RequestService } from './http/request.service';
   ],
   providers: [
     AuthService,
-    RequestService
+    RequestService,
+    PersistenceService
   ]
 })
 export class CoreModule { }

@@ -8,7 +8,7 @@ export class AuthService {
   private loggedInUser: User | undefined;
   private tokenKey = 'access_token';
   constructor(private httpService: RequestService,
-    @Inject(PersistenceService) private persistenceService: PersistenceService) { }
+    private persistenceService: PersistenceService) { }
 
   login() {
 
