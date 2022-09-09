@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './auth/auth.service';
 import { RequestService } from './http/request.service';
-import { PersistenceService } from './services/persistence.service';
+import { PersistenceService, STORAGE } from './services/persistence.service';
 
 
 
@@ -14,7 +14,8 @@ import { PersistenceService } from './services/persistence.service';
   providers: [
     AuthService,
     RequestService,
-    PersistenceService
+    PersistenceService,
+    // { provide: STORAGE, useFactory: () => sessionStorage}
   ]
 })
 export class CoreModule { }
