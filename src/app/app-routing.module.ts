@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './views/home/home.component';
-import { SigninComponent } from './views/home/components/signin/signin.component';
 
 const routes: Routes = [
   {
@@ -28,7 +26,7 @@ const routes: Routes = [
   {
     path: 'feed',
     loadChildren: () => import('./views/feed/feed.module').then((m) => m.FeedModule),
-  },
+  }
 ];
 
 @NgModule({

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { HomeModule } from './views/home/home.module';
+// import { HomeModule } from './views/home_/home.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HomeModule } from './views/home/home.module';
     // CoreModule,
     SharedModule,
     HomeModule,
+    // HomeModule,
     // ProfileModule,
     // DashboardModule
   ],
