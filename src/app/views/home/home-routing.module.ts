@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'welcome',
-    pathMatch: 'prefix'
+    pathMatch: 'full'
   },
   {
     path: 'welcome',
@@ -14,16 +14,15 @@ const routes: Routes = [
     children: [
       {
         path: 'signin',
-        // component: SigninComponent,
-        // Here we are lazy loading a standalone component
-        loadComponent: () => import('../../shared/signin/signin.component').then(c => c.SigninComponent)
+        // Here we are lazy loading a standalone component, in the 'signin' path
+        loadComponent: () => import('../../shared/standalone/signin/signin.component').then(c => c.SigninComponent)
+      },
+      {
+        path: 'about',
+        loadComponent: () => import('../../shared/standalone/about/about.component').then(c => c.AboutComponent)
       }
     ]
-  },
-  // {
-  //   path: 'welcome/signin',
-  //   loadChildren: () => import('./home.routes').then(r => r.HomeRoutes)
-  // }
+  }
 ];
 
 @NgModule({
