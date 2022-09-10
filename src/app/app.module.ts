@@ -3,21 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './views/home/home.component';
 import { SharedModule } from './shared/shared.module';
-import { SigninComponent } from './views/signin/signin.component';
+import { FormsModule } from '@angular/forms';
+import { HomeModule } from './views/home/home.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    SigninComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     // CoreModule,
     SharedModule,
+    HomeModule,
     // ProfileModule,
     // DashboardModule
   ],

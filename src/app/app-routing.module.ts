@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
-import { SigninComponent } from './views/signin/signin.component';
+import { SigninComponent } from './views/home/components/signin/signin.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'sign-in', component: SigninComponent },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'prefix'
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./views/home/home.module').then((m) => m.HomeModule),
+  },
   {
     path: 'profile',
     loadChildren: () => import('./views/profile/profile.module').then((m) => m.ProfileModule),
