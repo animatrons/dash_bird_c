@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "id": "0",
+      "email": "shrif@dot.com",
+      "password": "0000",
+      "firstName": "shrif",
+      "lastName": "shrifi"
+    },
+    {
+      "id": "1",
+      "email": "osman@dot.com",
+      "password": "0000",
+      "firstName": "osman",
+      "lastName": "osmani"
+    },
+    {
+      "id": "2",
+      "email": "hajib@dot.com",
+      "password": "1111",
+      "firstName": "hajib",
+      "lastName": "mahjoub"
+    },
+    {
+      "id": "3",
+      "email": "hussa@dot.com",
+      "password": "5555",
+      "firstName": "hussam",
+      "lastName": "amrani"
+    }
+  ],
+  "posts": [
+    {
+      "userId": "0",
+      "userName": "shrif",
+      "title": "First!",
+      "content": "This is the first post ever."
+    },
+    {
+      "userId": "0",
+      "userName": "shrif",
+      "title": "Somenthing i have to say",
+      "content": "A flying saucer was spotted this evenning in my village."
+    },
+    {
+      "userId": "1",
+      "userName": "osman osmani",
+      "title": "Hello",
+      "content": "This is a friendly platform."
+    },
+    {
+      "userId": "2",
+      "userName": "hajib mahjoub",
+      "title": "I make music",
+      "content": "Checkout my soundcloud."
+    },
+    {
+      "userId": "3",
+      "userName": "hussa",
+      "title": "I don't exist",
+      "content": "Just keep scrolling."
+    }
+  ]
+}
