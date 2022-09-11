@@ -12,35 +12,44 @@ import { AuthService } from 'src/app/core/auth/auth.service';
     FormsModule
   ],
   providers: [
-    AuthService
+    AuthService,
   ],
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.sass']
 })
 export class SigninComponent implements OnInit {
   user: User = new User();
-  isValid: boolean = false;
+  isLoading: boolean = false;
+  loggInError = false;
 
-
-  constructor(private authService: AuthService) { }
+  constructor
+    (
+      private authService: AuthService
+    ) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
     console.log('User credentials submitted: ', this.user);
+    this.isLoading = true;
     this.authService.login(
       this.user.email,
       this.user.password
     ).subscribe({
       next: (user) => {
         console.log('Welcome back sir/madame: ', user);
+        this.loggInError = false;
+        // this.messagingService.push(new MessageDTO(user, false));
       },
       error: (err) => {
         console.error('Identity unregistered, invalid or rejcted', err);
+        this.loggInError = true;
+        // this.messagingService.push(new MessageDTO(err, true));
       },
       complete: () => {
         this.user = new User();
+        this.isLoading = false;
       }
     })
   }

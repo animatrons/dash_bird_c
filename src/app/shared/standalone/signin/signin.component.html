@@ -1,5 +1,7 @@
 <p>Sign in:</p>
-<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+<form #myForm="ngForm" (ngSubmit)="onSubmit()" [ngClass]="loggInError ? 'error' : ''">
+  <strong *ngIf="loggInError" style="color: red;">Invalid credentials. If you don't belong here then GET OUT</strong>
+  <strong *ngIf="isLoading">We are trying to log you in, be patient...</strong>
   <p>
       <label>Email address:</label>
       <!-- Inside form tag, formcontrol using "ngModel" must have attr "name" defined, OR should be standalone [ngModelOptions]="{standalone: true}" -->
