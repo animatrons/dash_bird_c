@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileModule } from './profile/profile.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { CoreModule } from '../core/core.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -12,7 +13,8 @@ import { CoreModule } from '../core/core.module';
     CommonModule,
     ProfileModule,
     DashboardModule,
-    CoreModule
+    CoreModule,
+    SharedModule
   ]
 })
 export class ViewModule { }
