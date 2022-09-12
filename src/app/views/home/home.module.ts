@@ -6,13 +6,15 @@ import { HomeComponent } from './home.component';
 import { FormsModule } from '@angular/forms';
 import { HomeHeaderComponent } from './components/home-header/home-header.component';
 import { HomeFooterComponent } from './components/home-footer/home-footer.component';
+import { HomeProfileComponent } from './components/home-profile/home-profile.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     HomeHeaderComponent,
-    HomeFooterComponent
+    HomeFooterComponent,
+    HomeProfileComponent
   ],
   imports: [
     CommonModule,

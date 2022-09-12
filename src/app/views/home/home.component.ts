@@ -10,7 +10,7 @@ import { User } from 'src/app/core/models/User';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   isSignedIn: boolean = false;
-  currentUser: User | undefined = new User();
+  currentUser: User = new User();
   authSub: Subscription = new Subscription;
   constructor
     (
@@ -18,8 +18,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit(): void {
-    this.authSub = this.authService.onAuthStateChange()
+    console.log('Home init');
+    this.authSub = this.authService.isLoggedInCurrent
       .subscribe(authState => {
+        console.log('auth state changed ', authState);
         this.isSignedIn = authState;
         if (authState) {
           this.currentUser = this.authService.getLoggedInUser();
@@ -28,6 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log('Home gone');
     this.authSub.unsubscribe();
   }
 

@@ -2,7 +2,7 @@
 <h1>Welcome</h1>
 
 <div *ngIf="isSignedIn">
-  <h2>Welcome back my dear sir or madame {{currentUser?.lastName}} {{currentUser?.lastName}}</h2>
+  <h2>Welcome back my dear sir or madame {{currentUser.lastName}} {{currentUser.lastName}}</h2>
   <p> How may i help you today? </p>
 </div>
 <app-home-header [isSignedIn]="isSignedIn"></app-home-header>
