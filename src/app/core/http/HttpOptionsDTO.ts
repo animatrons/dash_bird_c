@@ -1,4 +1,4 @@
-class HttpOptionsDTO {
+export class HttpOptionsDTO {
   params: Map<string, string>;
   headers?: Map<string, string>;
   body?: any;
@@ -54,6 +54,7 @@ class HttpOptionsDTO {
   constructor() {
     this.params = new Map<string, string>();
     this.headers = new Map<string, string>();
+    this.headers.set('Content-Type', 'application/json')
     this.body = {};
   }
 }
