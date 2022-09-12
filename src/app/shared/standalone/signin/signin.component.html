@@ -5,12 +5,12 @@
   <p>
       <label>Email address:</label>
       <!-- Inside form tag, formcontrol using "ngModel" must have attr "name" defined, OR should be standalone [ngModelOptions]="{standalone: true}" -->
-      <input type="email" name="emailFormControl"
+      <input [disabled]="isLoading" type="email" name="emailFormControl"
           [(ngModel)]="user.email" required>
   </p>
   <p>
       <label>Password:</label>
-      <input type="password" name="passwordFormControl"
+      <input [disabled]="isLoading" type="password" name="passwordFormControl"
           [(ngModel)]="user.password" required>
   </p>
   <p>
