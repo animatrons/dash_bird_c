@@ -1,69 +1,55 @@
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, retry, tap, timeout } from 'rxjs';
-import { RequestService } from '../http/request.service';
+import { BehaviorSubject, lastValueFrom, map, Observable, of, retry, share, single, switchMap, tap, timeout } from 'rxjs';
 import { User } from '../models/User';
 import { PersistenceService } from '../services/persistence.service';
-
-const REGISTERED_USERS_EXPL: User[] = [
-  {
-    id: '496',
-    email: 'osman@dot.com',
-    password: 'secret',
-    firstName: 'osman',
-    lastName: 'osmani'
-  },
-  {
-    id: '496',
-    email: 'hajib@dot.com',
-    password: 'secret',
-    firstName: 'hajib',
-    lastName: 'mahjoub'
-  }
-]
+import { UserService } from '../services/user.service';
 
 @Injectable()
 export class AuthService {
-  private loggedInUser: User | undefined;
+  private loggedInUser: User = new User();
   private TOKEN_STORAGE_KEY = 'access_token';
 
   private isLoggedInSource = new BehaviorSubject<boolean>(false);
-  private isLoggedInCurrent = this.isLoggedInSource.asObservable();
+  public isLoggedInCurrent = this.isLoggedInSource.asObservable();
 
-  constructor(private httpService: RequestService,
-    private persistenceService: PersistenceService) { }
+  constructor
+    (
+      private userService: UserService,
+      private persistenceService: PersistenceService
+    ) { }
 
-  login(email: string, password: string): Observable<User | undefined> {
-    const user = REGISTERED_USERS_EXPL.find(user =>
-      user.email.toLowerCase() === email.trim().toLowerCase()
-      && user.password === password)
-    //
-    let login$ = new Observable<User | undefined>()
-    login$ = of(user)
+  login_(email: string, password: string) {
+    return this.userService
+      .getByEmailAndPassword(email, password)
       .pipe(
-        timeout(2000),
-        retry(1),
-        tap(v => {
-          this.loggedInUser = v;
-          if (v === undefined) {
+        map((response) => {
+          console.log('Got login result, let\'s see if it\'s a valid user: ', response);
+          if (response.status === 500) {
             this.changeAuthState(false);
-            throw new Error("User is invalid bro, check your credientials, are you even registered?");
+            throw new Error("We are currently having some serious problems internally, come back later, or never.");
           }
-          this.changeAuthState(true);
-          // TODO: remove password from loggedInUser object
-          console.log('Got login result, let\'s see if it\'s a valid user: ', v);
-        }),
+          if (response.status === 404) {
+            this.changeAuthState(false);
+            throw new Error("Your are either lost or an imposter, in both cases leave before i call the cops.");
+          }
+          if (response.status === 200) {
+            this.loggedInUser = response.data;
+            this.changeAuthState(true);
+          }
+          return this.loggedInUser;
+        })
       )
-    return login$;
   }
 
   logOut() {
-    this.loggedInUser = undefined;
+    this.loggedInUser = new User();
     this.changeAuthState(false);
     this.destroyToken();
   }
 
-  isUserLoggedIn() {
-    return this.loggedInUser !== undefined;
+  async isUserLoggedIn() {
+    const state$ = this.onAuthStateChange().pipe(single());
+    return await lastValueFrom(state$);
   }
 
   changeAuthState(isLoggedIn: boolean) {
@@ -71,7 +57,7 @@ export class AuthService {
   }
 
   onAuthStateChange() {
-    return this.isLoggedInCurrent;
+    return this.isLoggedInCurrent.pipe(share());
   }
 
   getLoggedInUser() {
