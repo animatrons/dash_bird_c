@@ -47,9 +47,12 @@ export class AuthService {
     this.destroyToken();
   }
 
-  async isUserLoggedIn() {
-    const state$ = this.onAuthStateChange().pipe(single());
-    return await lastValueFrom(state$);
+  isUserLoggedIn() {
+    return this.onAuthStateChange();
+  }
+
+  userISloggedIn() {
+    return this.loggedInUser.email != '';
   }
 
   changeAuthState(isLoggedIn: boolean) {

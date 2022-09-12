@@ -3,4 +3,5 @@
   <i *ngIf="!isSignedIn" class="link"><a [routerLink]="['signin']" routerLinkActive="active" >Sign in</a></i>
   <i *ngIf="isSignedIn" class="link"><button (click)="onSignOutButtonClicked()">Sign me out</button></i>
   <i class="link"><a [routerLink]="['about']" routerLinkActive="active">About</a></i>
+  <i *ngIf="isSignedIn" class="link"><a [routerLink]="['profile']" routerLinkActive="active">Profile</a></i>
 </div>

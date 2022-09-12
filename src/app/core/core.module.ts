@@ -5,6 +5,7 @@ import { RequestService } from './http/request.service';
 import { PersistenceService, STORAGE } from './services/persistence.service';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './guards/auth.guard';
 
 
 
@@ -18,8 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     AuthService,
     RequestService,
     PersistenceService,
-    UserService
-    // { provide: STORAGE, useFactory: () => sessionStorage}
+    UserService,
+    AuthGuard
   ]
 })
 export class CoreModule { }

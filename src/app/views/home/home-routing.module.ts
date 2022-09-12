@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
+import { HomeProfileComponent } from './components/home-profile/home-profile.component';
+import { AuthGuard } from "../../core/guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -20,6 +22,11 @@ const routes: Routes = [
       {
         path: 'about',
         loadComponent: () => import('../../shared/standalone/about/about.component').then(c => c.AboutComponent)
+      },
+      {
+        path: 'profile',
+        component: HomeProfileComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }
