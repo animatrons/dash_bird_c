@@ -1,14 +1,26 @@
 import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, map, mergeMap, of } from "rxjs";
+import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
+import { Store } from "@ngrx/store";
+import { catchError, filter, map, mergeMap, of } from "rxjs";
 import { TechnicalError } from "src/app/core/models/Error";
+import { AppStateInterface } from "src/app/types/app-state.interface";
 import { PostsService } from "../service/posts.service";
 import * as PostsActions from "./actions";
+import { fromPosts } from "./selectors";
 
 @Injectable()
 export class PostsEffects {
 
-  public loadPosts$ = createEffect(() => {
+  getPosts$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(PostsActions.getPosts),
+      concatLatestFrom(() => this.store.select(fromPosts.loadStatusSelector)),
+      filter(([, status]) => status === "NOT_LOADED"),
+      map(() => PostsActions.loadPosts())
+    )
+  })
+
+  loadPosts$ = createEffect(() => {
     return this.action$.pipe(
       ofType(PostsActions.loadPosts),
       mergeMap(() => {
@@ -23,5 +35,5 @@ export class PostsEffects {
     )
   })
 
-  constructor(private action$: Actions, private postsService: PostsService) {}
+  constructor(private action$: Actions, private postsService: PostsService, private store: Store<AppStateInterface>) {}
 }
