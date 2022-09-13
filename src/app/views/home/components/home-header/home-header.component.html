@@ -1,5 +1,6 @@
 <div style = "display: flex;">
   <i class="link"><a routerLink="/home/welcome" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Home</a></i>
+  <i class="link"><a [routerLink]="['posts']" routerLinkActive="active">Post feed</a></i>
   <i *ngIf="!isSignedIn" class="link"><a [routerLink]="['signin']" routerLinkActive="active" >Sign in</a></i>
   <i *ngIf="isSignedIn" class="link"><button (click)="onSignOutButtonClicked()">Sign me out</button></i>
   <i class="link"><a [routerLink]="['about']" routerLinkActive="active">About</a></i>

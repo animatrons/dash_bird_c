@@ -4,6 +4,7 @@ import { ProfileModule } from './profile/profile.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
+import { PostsModule } from './posts/posts.module';
 
 
 
@@ -14,7 +15,8 @@ import { SharedModule } from '../shared/shared.module';
     ProfileModule,
     DashboardModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    // PostsModule
   ]
 })
 export class ViewModule { }
