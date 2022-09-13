@@ -10,7 +10,7 @@ export class PostsService {
 
   constructor(private httpService: RequestService) { }
 
-  getAll() {
+  loadAll() {
     return this.httpService
       .get<PostInterface[]>(this.uri)
       .pipe(delay(3000))

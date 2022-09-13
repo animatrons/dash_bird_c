@@ -25,7 +25,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     // dispatch the Get Posts action
-    this.store.dispatch(PostsActions.getPosts());
+    this.store.dispatch(PostsActions.loadPosts());
   }
 
 }

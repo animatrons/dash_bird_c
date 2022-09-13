@@ -8,15 +8,15 @@ import * as PostsActions from "./actions";
 @Injectable()
 export class PostsEffects {
 
-  public getPosts$ = createEffect(() => {
+  public loadPosts$ = createEffect(() => {
     return this.action$.pipe(
-      ofType(PostsActions.getPosts),
+      ofType(PostsActions.loadPosts),
       mergeMap(() => {
-        return this.postsService.getAll()
+        return this.postsService.loadAll()
           .pipe(
-            map((posts) => PostsActions.getPostsSuccess({ posts })),
+            map((posts) => PostsActions.loadPostsSuccess({ posts })),
             catchError((error) =>
-              of(PostsActions.getPostsFailure({error: new TechnicalError(error, 0)}))
+              of(PostsActions.loadPostsFailure({error: new TechnicalError(error, 0)}))
             )
           )
       })
