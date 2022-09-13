@@ -8,10 +8,12 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from "./store/reducer";
 import { EffectsModule } from '@ngrx/effects';
 import { PostsEffects } from './store/effects';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   declarations: [
-    PostsComponent
+    PostsComponent,
+    PostComponent
   ],
   imports: [
     CommonModule,

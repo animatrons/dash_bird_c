@@ -1,3 +1,10 @@
 
-<h3 *ngIf="isLoading$ | async">Hold up before we get you the latest posts...</h3>
-<h3 *ngIf="!(isLoading$ | async)">These are the ALL POSTS WE'VE GOT OK!</h3>
+<h3 *ngIf="(isLoading$ | async) else postsBlock">Hold up before we get you the latest posts...</h3>
+<ng-template #postsBlock>
+  <h3 *ngIf="!(posts$ | async) else fullPostsBlock">WE AINT GOT NO POSTS</h3>
+  <ng-template #fullPostsBlock>
+    <h3>These are ALL THE POSTS WE'VE GOT OK</h3>
+    <app-post *ngFor="let post of posts$ | async" [post]="post"></app-post>
+  </ng-template>
+</ng-template>
+
