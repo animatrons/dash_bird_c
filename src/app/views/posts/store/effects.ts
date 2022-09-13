@@ -17,8 +17,8 @@ export class PostsEffects {
     return this.action$.pipe(
       ofType(PostsActions.getPosts),
       concatLatestFrom(() => [
-        this.store.select(fromPosts.updatedAtSelector),
-        this.store.select(fromPosts.loadStatusSelector)
+        this.store.select(fromPosts.selectUpdatedAt),
+        this.store.select(fromPosts.selectLoadStatus)
       ]),
       filter(([, updatedAt, status]) => status === "NOT_LOADED" || this.timeUtils.timeSince(updatedAt) > this.MAX_AGE),
       map(() => PostsActions.loadPosts())

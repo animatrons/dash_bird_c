@@ -1,6 +1,8 @@
 <div>
-  <strong>By: </strong> <i>{{post.userName}}</i>
-  <strong>Title: </strong> <i>{{post.title}}</i>
+  <strong>By: </strong> <i>{{post?.userName}}</i>
+  <strong>Title: </strong> <i>{{post?.title}}</i>
   <strong>Content: </strong>
-  <p>{{post.content}}</p>
+  <p>{{post?.content}}</p>
+  <a *ngIf="!selected" [routerLink]="['select', post?.id]">Select</a>
+  <a *ngIf="selected" routerLink="../..">Back</a>
 </div>

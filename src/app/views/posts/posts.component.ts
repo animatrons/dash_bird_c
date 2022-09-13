@@ -13,15 +13,14 @@ import { PostInterface } from './types/post.interface';
   styleUrls: ['./posts.component.sass']
 })
 export class PostsComponent implements OnInit {
-  // isLoading$: Observable<boolean>;
   loadStatus$: Observable<"NOT_LOADED" | "LOADING" | "LOADED">;
   posts$: Observable<PostInterface[]>;
   error$: Observable<TechnicalError | null>;
 
   constructor(private store: Store<AppStateInterface>) {
-    this.loadStatus$ = this.store.pipe<"NOT_LOADED" | "LOADING" | "LOADED">(select(fromPosts.loadStatusSelector));
-    this.posts$ = this.store.pipe<PostInterface[]>(select(fromPosts.postsSelector));
-    this.error$ = this.store.pipe<TechnicalError | null>(select(fromPosts.errorSelector));
+    this.loadStatus$ = this.store.pipe<"NOT_LOADED" | "LOADING" | "LOADED">(select(fromPosts.selectLoadStatus));
+    this.posts$ = this.store.pipe<PostInterface[]>(select(fromPosts.selectAllPosts));
+    this.error$ = this.store.pipe<TechnicalError | null>(select(fromPosts.selectError));
   }
 
   ngOnInit(): void {

@@ -31,30 +31,35 @@
   ],
   "posts": [
     {
+      "id": "00",
       "userId": "0",
       "userName": "shrif",
       "title": "First!",
       "content": "This is the first post ever."
     },
     {
+      "id": "01",
       "userId": "0",
       "userName": "shrif",
       "title": "Somenthing i have to say",
       "content": "A flying saucer was spotted this evenning in my village."
     },
     {
+      "id": "02",
       "userId": "1",
       "userName": "osman osmani",
       "title": "Hello",
       "content": "This is a friendly platform."
     },
     {
+      "id": "03",
       "userId": "2",
       "userName": "hajib mahjoub",
       "title": "I make music",
       "content": "Checkout my soundcloud."
     },
     {
+      "id": "04",
       "userId": "3",
       "userName": "hussa",
       "title": "I don't exist",
