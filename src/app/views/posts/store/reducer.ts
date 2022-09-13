@@ -4,6 +4,7 @@ import * as PostsActions from "./actions";
 
 export const initialState: PostStateInterface = {
   loadStatus: "NOT_LOADED",
+  updatedAt: Date.now(),
   posts: [],
   error: null
 }
@@ -18,6 +19,7 @@ export const reducers = createReducer(
     on(PostsActions.loadPostsSuccess, (state, action) => ({
       ...state,
       loadStatus: "LOADED",
+      updatedAt: Date.now(),
       posts: action.posts
     })),
     on(PostsActions.loadPostsFailure, (state, action) => ({

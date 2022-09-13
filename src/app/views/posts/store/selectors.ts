@@ -7,7 +7,12 @@ export const selectFeature = (state: AppStateInterface) => state.posts;
 export const loadStatusSelector = createSelector(
   selectFeature,
   (state) => state.loadStatus
-)
+);
+
+export const updatedAtSelector = createSelector(
+  selectFeature,
+  (state) => state.updatedAt
+);
 
 export const postsSelector = createSelector(
   selectFeature,
@@ -21,6 +26,7 @@ export const errorSelector = createSelector(
 
 export const fromPosts = {
   loadStatusSelector,
+  updatedAtSelector,
   postsSelector,
   errorSelector
 }

@@ -6,6 +6,7 @@ import { PersistenceService, STORAGE } from './services/persistence.service';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
+import { TimeService } from './utils/time.service';
 
 
 
@@ -20,7 +21,8 @@ import { AuthGuard } from './guards/auth.guard';
     RequestService,
     PersistenceService,
     UserService,
-    AuthGuard
+    AuthGuard,
+    TimeService
   ]
 })
 export class CoreModule { }

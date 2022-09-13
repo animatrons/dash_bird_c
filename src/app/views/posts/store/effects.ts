@@ -7,18 +7,23 @@ import { AppStateInterface } from "src/app/types/app-state.interface";
 import { PostsService } from "../service/posts.service";
 import * as PostsActions from "./actions";
 import { fromPosts } from "./selectors";
+import { TimeService } from "../../../core/utils/time.service";
 
 @Injectable()
 export class PostsEffects {
+  MAX_AGE = 3600000; // Max age of state before loading new data. One hour in ms
 
   getPosts$ = createEffect(() => {
     return this.action$.pipe(
       ofType(PostsActions.getPosts),
-      concatLatestFrom(() => this.store.select(fromPosts.loadStatusSelector)),
-      filter(([, status]) => status === "NOT_LOADED"),
+      concatLatestFrom(() => [
+        this.store.select(fromPosts.updatedAtSelector),
+        this.store.select(fromPosts.loadStatusSelector)
+      ]),
+      filter(([, updatedAt, status]) => status === "NOT_LOADED" || this.timeUtils.timeSince(updatedAt) > this.MAX_AGE),
       map(() => PostsActions.loadPosts())
     )
-  })
+  });
 
   loadPosts$ = createEffect(() => {
     return this.action$.pipe(
@@ -33,7 +38,8 @@ export class PostsEffects {
           )
       })
     )
-  })
+  });
 
-  constructor(private action$: Actions, private postsService: PostsService, private store: Store<AppStateInterface>) {}
+  constructor(private action$: Actions, private postsService: PostsService,
+    private store: Store<AppStateInterface>, private timeUtils: TimeService) {}
 }
