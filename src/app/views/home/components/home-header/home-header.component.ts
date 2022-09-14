@@ -10,14 +10,21 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 export class HomeHeaderComponent implements OnInit {
   @Input() isSignedIn: boolean = false;
 
+  active = 'home';
+  public isMenuCollapsed = true;
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onSignOutButtonClicked() {
+  logOut() {
     this.authService.logOut();
     this.router.navigate(['']);
+  }
+
+  navigate(path: string) {
+    this.router.navigate(['home/welcome', path])
   }
 
 }

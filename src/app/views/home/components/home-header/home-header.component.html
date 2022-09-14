@@ -1,8 +1,47 @@
-<div style = "display: flex;">
-  <i class="link"><a routerLink="/home/welcome" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Home</a></i>
-  <i class="link"><a [routerLink]="['posts']" routerLinkActive="active">Post feed</a></i>
-  <i *ngIf="!isSignedIn" class="link"><a [routerLink]="['signin']" routerLinkActive="active" >Sign in</a></i>
-  <i *ngIf="isSignedIn" class="link"><button (click)="onSignOutButtonClicked()">Sign me out</button></i>
-  <i class="link"><a [routerLink]="['about']" routerLinkActive="active">About</a></i>
-  <i *ngIf="isSignedIn" class="link"><a [routerLink]="['profile']" routerLinkActive="active">Profile</a></i>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">DBird</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" (click)="isMenuCollapsed = !isMenuCollapsed" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" [ngbCollapse]="isMenuCollapsed"  id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/home/welcome">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="isSignedIn" [routerLink]="['']">Go to Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['posts']">Feed</a>
+        </li>
+        <!-- <li class="nav-item dropdown" ngbDropdown>
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="isSignedIn" [routerLink]="['profile']">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['about']">About</a>
+        </li>
+      </ul>
+      <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> -->
+      <div class="d-flex">
+        <button *ngIf="!isSignedIn" (click)="navigate('signin')" class="btn btn-outline-primary me-2" type="button">Login</button>
+        <button *ngIf="!isSignedIn" class="btn btn-primary btn-toolbar" type="button">Sing up</button>
+        <button *ngIf="isSignedIn" (click)="logOut()" class="btn btn-dark btn-toolbar" type="button">Log out</button>
+      </div>
+    </div>
+  </div>
+</nav>

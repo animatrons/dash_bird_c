@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeHeaderComponent } from './components/home-header/home-header.component';
 import { HomeFooterComponent } from './components/home-footer/home-footer.component';
 import { HomeProfileComponent } from './components/home-profile/home-profile.component';
+import { NgbCollapseModule, NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -19,7 +20,10 @@ import { HomeProfileComponent } from './components/home-profile/home-profile.com
   imports: [
     CommonModule,
     HomeRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbNavModule,
+    NgbCollapseModule,
+    NgbDropdownModule
   ]
 })
 export class HomeModule { }

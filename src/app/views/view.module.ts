@@ -5,6 +5,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 import { PostsModule } from './posts/posts.module';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -17,6 +18,7 @@ import { PostsModule } from './posts/posts.module';
     CoreModule,
     SharedModule,
     // PostsModule
+    // NgbModule
   ]
 })
 export class ViewModule { }
