@@ -24,7 +24,7 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   navigate(path: string) {
-    this.router.navigate(['home/welcome', path])
+    this.router.navigate(['home/welcome', path]);
   }
 
 }

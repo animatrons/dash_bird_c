@@ -8,6 +8,7 @@ import { HomeHeaderComponent } from './components/home-header/home-header.compon
 import { HomeFooterComponent } from './components/home-footer/home-footer.component';
 import { HomeProfileComponent } from './components/home-profile/home-profile.component';
 import { NgbCollapseModule, NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { NgbCollapseModule, NgbDropdownModule, NgbNavModule } from '@ng-bootstra
     HomeComponent,
     HomeHeaderComponent,
     HomeFooterComponent,
-    HomeProfileComponent
+    HomeProfileComponent,
+    WelcomeComponent
   ],
   imports: [
     CommonModule,

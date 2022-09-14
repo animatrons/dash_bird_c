@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { HomeProfileComponent } from './components/home-profile/home-profile.component';
 import { AuthGuard } from "../../core/guards/auth.guard";
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
     path: 'welcome',
     component: HomeComponent,
     children: [
+      {
+        path: '',
+        component: WelcomeComponent
+      },
       {
         path: 'signin',
         // Here we are lazy loading a standalone component, in the 'signin' path
