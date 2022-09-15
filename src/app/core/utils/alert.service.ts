@@ -8,7 +8,6 @@ import { Alert, AlertTypes } from '../models/Alert';
 export class AlertService {
   private count = 0;
   private alertSubject = new Subject<Alert>();
-  private defaultId = 'default-alert';
 
   constructor() { }
 
@@ -40,6 +39,5 @@ export class AlertService {
   clear() {
     this.alert(new Alert())
   }
-
 
 }
