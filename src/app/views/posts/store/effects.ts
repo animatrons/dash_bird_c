@@ -3,7 +3,7 @@ import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { catchError, filter, map, mergeMap, of } from "rxjs";
 import { TechnicalError } from "src/app/core/models/Error";
-import { AppStateInterface } from "src/app/types/app-state.interface";
+import { AppState } from 'src/app/store/index';
 import { PostsService } from "../service/posts.service";
 import * as PostsActions from "./actions";
 import { fromPosts } from "./selectors";
@@ -41,5 +41,5 @@ export class PostsEffects {
   });
 
   constructor(private action$: Actions, private postsService: PostsService,
-    private store: Store<AppStateInterface>, private timeUtils: TimeService) {}
+    private store: Store<AppState>, private timeUtils: TimeService) {}
 }

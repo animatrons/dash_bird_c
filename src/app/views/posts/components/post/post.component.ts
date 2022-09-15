@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { NavigationService } from 'src/app/core/utils/navigation.service';
-import { AppStateInterface } from 'src/app/types/app-state.interface';
+import { AppState } from 'src/app/store/index';
 import { fromPosts } from '../../store/selectors';
 import { PostInterface } from '../../types/post.interface';
 import { PostsActions } from "../../store/actions";
@@ -19,7 +19,7 @@ export class PostComponent implements OnInit, OnDestroy {
   @Input() post!: PostInterface | undefined;
   loadStatus$!: Observable<"NOT_LOADED" | "LOADING" | "LOADED">;
 
-  constructor(private activatedRoute: ActivatedRoute, private nav: NavigationService, private router: Router, private store: Store<AppStateInterface>) { }
+  constructor(private activatedRoute: ActivatedRoute, private nav: NavigationService, private router: Router, private store: Store<AppState>) { }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.data['mode'] === 'select') {

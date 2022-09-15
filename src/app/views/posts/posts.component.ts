@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { TechnicalError } from 'src/app/core/models/Error';
 import { AlertService } from 'src/app/core/utils/alert.service';
-import { AppStateInterface } from 'src/app/types/app-state.interface';
+import { AppState } from 'src/app/store/index';
 import * as PostsActions from "./store/actions";
 import { fromPosts } from './store/selectors';
 import { PostInterface } from './types/post.interface';
@@ -18,7 +18,7 @@ export class PostsComponent implements OnInit {
   posts$: Observable<PostInterface[]>;
   error$: Observable<TechnicalError | null>;
 
-  constructor(private store: Store<AppStateInterface>, private alertService: AlertService) {
+  constructor(private store: Store<AppState>, private alertService: AlertService) {
     this.loadStatus$ = this.store.pipe<"NOT_LOADED" | "LOADING" | "LOADED">(select(fromPosts.selectLoadStatus));
     this.posts$ = this.store.pipe<PostInterface[]>(select(fromPosts.selectAllPosts));
     this.error$ = this.store.pipe<TechnicalError | null>(select(fromPosts.selectError));

@@ -1,8 +1,18 @@
 import { createReducer, on } from "@ngrx/store";
-import { PostStateInterface } from "../types/post-state.interface";
 import * as PostsActions from "./actions";
+import { TechnicalError } from "src/app/core/models/Error";
+import { PostInterface } from '../types/post.interface';
 
-export const initialState: PostStateInterface = {
+export const postsFeatureKey = 'posts';
+
+export interface State {
+  loadStatus: "NOT_LOADED" | "LOADING" | "LOADED";
+  updatedAt: number,
+  posts: PostInterface[];
+  error: TechnicalError | null;
+}
+
+export const initialState: State = {
   loadStatus: "NOT_LOADED",
   updatedAt: Date.now(),
   posts: [],
