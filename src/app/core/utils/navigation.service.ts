@@ -1,0 +1,26 @@
+import { Injectable } from '@angular/core';
+import { Location } from '@angular/common';
+import { NavigationEnd, Router } from '@angular/router';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class NavigationService {
+  navCounter = 0;
+
+  constructor(private router: Router, private location: Location) {
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.navCounter++;
+      }
+    })
+  }
+
+  back() {
+    if (this.navCounter !== 0) {
+      this.location.back()
+    } else {
+      this.router.navigateByUrl('/')
+    }
+  }
+}

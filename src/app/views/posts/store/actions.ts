@@ -11,4 +11,11 @@ export const loadPostsSuccess = createAction(
 export const loadPostsFailure = createAction(
     '[Posts] Load Posts Failure',
     props<{error: TechnicalError}>()
-  );
+);
+
+export const PostsActions = {
+  getPosts,
+  loadPosts,
+  loadPostsSuccess,
+  loadPostsFailure
+}

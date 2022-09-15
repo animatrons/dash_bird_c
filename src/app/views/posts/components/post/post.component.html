@@ -1,8 +1,16 @@
-<div>
-  <strong>By: </strong> <i>{{post?.userName}}</i>
-  <strong>Title: </strong> <i>{{post?.title}}</i>
-  <strong>Content: </strong>
-  <p>{{post?.content}}</p>
-  <a *ngIf="!selected" [routerLink]="['select', post?.id]">Select</a>
-  <a *ngIf="selected" routerLink="../..">Back</a>
+<div class="container-sm my-5" *ngIf="(loadStatus$ | async) === 'LOADING' else postsBlock">
+  <span class="text-muted fst-italic">Hold up before we get you the latest posts...</span>
+  <div class="spinner-border inline mx-4" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
 </div>
+<ng-template #postsBlock>
+  <div class="my-3 p-5 bg-lignt border rounded" [ngClass]="{'container-sm': selected}">
+    <h2>{{post?.title}}</h2>
+    <p class="pb-2">{{post?.content}}</p>
+    <p class="text-muted fst-italic border-bottom">{{post?.userName}}</p>
+    <button *ngIf="!selected" class="btn btn-outline-secondary" (click)="navigate(['select', post?.id])">Select</button>
+    <button *ngIf="selected" class="btn btn-outline-secondary" (click)="back()">Back</button>
+  </div>
+</ng-template>
+
