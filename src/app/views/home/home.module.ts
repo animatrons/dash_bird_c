@@ -9,6 +9,8 @@ import { HomeFooterComponent } from './components/home-footer/home-footer.compon
 import { HomeProfileComponent } from './components/home-profile/home-profile.component';
 import { NgbCollapseModule, NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { AlertComponent } from '../alert/alert.component';
+import { AlertModule } from '../alert/alert.module';
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     WelcomeComponent
   ],
   imports: [
+    AlertModule,
     CommonModule,
     HomeRoutingModule,
     FormsModule,

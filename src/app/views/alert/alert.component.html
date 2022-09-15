@@ -1,0 +1,18 @@
+<ng-container *ngFor="let alert of alerts">
+  <ngb-toast *ngIf="!alert.autoClose"
+    [header]="alert.title || 'toad'"
+    [class]="cssClass(alert)"
+    [autohide]="false"
+    (hidden)="removeAlert(alert)">
+    {{ alert.message }} , should stay open
+  </ngb-toast>
+
+  <ngb-toast *ngIf="alert.autoClose"
+    [header]="alert.title || 'toad'"
+    [class]="cssClass(alert)"
+    [autohide]="true"
+    [delay]="alert.delay"
+    (hidden)="removeAlert(alert)">
+    {{ alert.message }} , should auto close
+  </ngb-toast>
+</ng-container>

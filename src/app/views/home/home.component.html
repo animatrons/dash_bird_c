@@ -1,11 +1,8 @@
 <div class="page-wrapper">
   <app-home-header [isSignedIn]="isSignedIn"></app-home-header>
-  <!-- <div *ngIf="isSignedIn">
-  <h2>Welcome back my dear sir or madame {{currentUser.lastName}} {{currentUser.lastName}}</h2>
-  <p> How may i help you today? </p>
-</div> -->
   <div class="content-wrapper">
     <div class="content">
+      <app-alert class="m-2" aria-live="polite" aria-atomic="true"></app-alert>
       <router-outlet></router-outlet>
     </div>
     <div class="footer">

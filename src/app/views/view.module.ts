@@ -6,17 +6,22 @@ import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 import { PostsModule } from './posts/posts.module';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlertModule } from './alert/alert.module';
+import { AlertComponent } from './alert/alert.component';
+import { HomeModule } from './home/home.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
+    AlertModule,
     CommonModule,
     ProfileModule,
     DashboardModule,
     CoreModule,
-    SharedModule,
+    SharedModule
     // PostsModule
     // NgbModule
   ]
