@@ -20,12 +20,12 @@ const routes: Routes = [
         component: WelcomeComponent
       },
       {
-        path: 'signin',
-        // Here we are lazy loading a standalone component, in the 'signin' path
-        loadComponent: () => import('../../shared/standalone/signin/signin.component').then(c => c.SigninComponent)
+        path: 'login',
+        loadComponent: () => import('../login/login.module').then(c => c.LoginModule)
       },
       {
         path: 'about',
+        // Here we are lazy loading a standalone component, in the 'signin' path
         loadComponent: () => import('../../shared/standalone/about/about.component').then(c => c.AboutComponent)
       },
       {

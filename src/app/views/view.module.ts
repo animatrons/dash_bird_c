@@ -9,6 +9,7 @@ import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlertModule } from './alert/alert.module';
 import { AlertComponent } from './alert/alert.component';
 import { HomeModule } from './home/home.module';
+import { LoginModule } from './login/login.module';
 
 
 
@@ -21,7 +22,8 @@ import { HomeModule } from './home/home.module';
     ProfileModule,
     DashboardModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    LoginModule
     // PostsModule
     // NgbModule
   ]

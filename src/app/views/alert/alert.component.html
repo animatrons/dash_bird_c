@@ -4,7 +4,7 @@
     [class]="cssClass(alert)"
     [autohide]="false"
     (hidden)="removeAlert(alert)">
-    {{ alert.message }} , should stay open
+    {{ alert.message }}
   </ngb-toast>
 
   <ngb-toast *ngIf="alert.autoClose"
@@ -13,6 +13,6 @@
     [autohide]="true"
     [delay]="alert.delay"
     (hidden)="removeAlert(alert)">
-    {{ alert.message }} , should auto close
+    {{ alert.message }}
   </ngb-toast>
 </ng-container>
