@@ -10,6 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { NavigationService } from './core/utils/navigation.service';
+import { AlertModule } from './views/alert/alert.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NavigationService } from './core/utils/navigation.service';
         logOnly: environment.production, // Restrict extension to log-only mode
         autoPause: true, // Pauses recording actions and state changes when the extension window is not open
       }
-    )
+    ),
+    AlertModule
   ],
   providers: [
     // {
