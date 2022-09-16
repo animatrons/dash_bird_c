@@ -11,6 +11,8 @@ import { NgbCollapseModule, NgbDropdownModule, NgbNavModule } from '@ng-bootstra
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AlertComponent } from '../alert/alert.component';
 import { AlertModule } from '../alert/alert.module';
+import { LoginPetitComponent } from '../login/components/login-petit/login-petit.component';
+import { LoginModule } from '../login/login.module';
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { AlertModule } from '../alert/alert.module';
   imports: [
     AlertModule,
     CommonModule,
+    LoginModule,
     HomeRoutingModule,
     FormsModule,
     NgbNavModule,

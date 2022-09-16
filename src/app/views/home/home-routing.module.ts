@@ -21,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        loadComponent: () => import('../login/login.module').then(c => c.LoginModule)
+        loadChildren: () => import('../login/login.module').then(c => c.LoginModule)
       },
       {
         path: 'about',
