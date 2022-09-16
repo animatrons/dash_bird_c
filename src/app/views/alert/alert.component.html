@@ -1,5 +1,18 @@
 <ng-container *ngFor="let alert of alerts">
-  <ngb-toast *ngIf="!alert.autoClose"
+  <ngb-toast *ngIf="alert.loading"
+    [header]="alert.title || 'toad'"
+    [class]="cssClass(alert)"
+    [autohide]="!!(alert.autoClose$ | async)"
+    [delay]="100"
+    [animation]="true"
+    (hidden)="removeAlert(alert)"
+    >
+    <div class="spinner-border inline mx-2" role="status">
+      <!-- {{ alert.message }} -->
+    </div>
+    <span class="">{{ alert.message }}</span>
+  </ngb-toast>
+  <ngb-toast *ngIf="!alert.autoClose && !alert.loading"
     [header]="alert.title || 'toad'"
     [class]="cssClass(alert)"
     [autohide]="false"
@@ -7,12 +20,13 @@
     {{ alert.message }}
   </ngb-toast>
 
-  <ngb-toast *ngIf="alert.autoClose"
+  <ngb-toast *ngIf="alert.autoClose && !alert.loading"
     [header]="alert.title || 'toad'"
     [class]="cssClass(alert)"
     [autohide]="true"
     [delay]="alert.delay"
-    (hidden)="removeAlert(alert)">
+    (hidden)="removeAlert(alert)"
+    >
     {{ alert.message }}
   </ngb-toast>
 </ng-container>

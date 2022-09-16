@@ -26,7 +26,6 @@ export class AlertComponent implements OnInit {
         if (!alert.message) {
           // filter out alerts without 'keepAfterRouteChange' flag
           this.alerts = this.alerts.filter(x => x.keepAfterRouteChange);
-
           // remove 'keepAfterRouteChange' flag on the rest
           this.alerts.forEach(x => delete x.keepAfterRouteChange);
           return;

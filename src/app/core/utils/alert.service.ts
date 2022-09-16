@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { filter, Subject } from 'rxjs';
+import { filter, Observable, Subject } from 'rxjs';
 import { Alert, AlertTypes } from '../models/Alert';
 
 @Injectable({
@@ -34,6 +34,10 @@ export class AlertService {
 
   info(message: string, options?: Partial<Alert>) {
     this.alert(new Alert({...options, type: AlertTypes.Info, message}));
+  }
+
+  loading(message: string, autoClose$: Observable<boolean>, options?: Partial<Alert>) {
+    this.alert(new Alert({...options, loading: true, autoClose$, type: AlertTypes.Info, message}));
   }
 
   clear() {
