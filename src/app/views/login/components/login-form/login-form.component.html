@@ -1,0 +1,24 @@
+<main class="form-singin w-100 m-auto">
+  <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+    <h1 class="h3 mb-3">Please sign in</h1>
+    <div class="form-floating">
+      <input type="email" [(ngModel)]="user.email" name="emailFormControl"
+        required class="form-control form-signin-email" id="floatingInput"
+        placeholder="name@example.com">
+      <label for="floatingInput">Email adress</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" [(ngModel)]="user.password" name="passwordFormControl"
+        required placeholder="pss" class="form-control form-signin-password" id="floatingPassword">
+      <label for="floatingPassword">Password</label>
+    </div>
+    <div class="chackbox mb-3">
+      <label>
+        <input type="checkbox" value="remember">
+        Remember me
+      </label>
+    </div>
+    <button type="submit" [disabled]="!myForm.valid"
+      class="btn btn-lg btn-primary w-100">Login</button>
+  </form>
+</main>
