@@ -16,3 +16,7 @@ export const userAuthFailure = createAction(
   '[Auth] User Auth Failure',
   props<{ error: TechnicalError | BusinessError }>()
 );
+
+export const userLogOut = createAction(
+  '[Auth] User Log Out'
+)

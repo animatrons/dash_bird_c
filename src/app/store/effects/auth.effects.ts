@@ -48,6 +48,16 @@ export class AuthEffects {
     { dispatch: false }
   )
 
+  userLogOut$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.userLogOut),
+      tap(() => {
+        this.authService.logOut();
+        this.alertService.info(`See you later`, {title: 'Log out', autoClose: true})
+      })
+    )},
+    { dispatch: false }
+  )
 
   constructor(private actions$: Actions, private authService: AuthService, private alertService: AlertService) {}
 }
