@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, delay, map, of, retry, tap, throwError } from 'rxjs';
 import { HttpOptionsDTO } from '../http/HttpOptionsDTO';
 import { RequestService } from '../http/request.service';
+import { BusinessError, TechnicalError } from '../models/Error';
 import { ResponseDTO } from '../models/ResponseDTO.interface';
 import { User } from '../models/User';
 
@@ -25,17 +27,19 @@ export class UserService {
         retry(1),
         map((v) => {
           if (v == undefined) {
-            throw new Error('NO RESPONSE SENT');
+            throw new TechnicalError('NO RESPONSE SENT', 500);
           }
           if (v.length === 0) {
-            return new ResponseDTO<User | null>(null, 404, 'NOT FOUND');
+            return new ResponseDTO<null>(null, 404, 'USER NOT FOUND');
           }
           return new ResponseDTO<User>(v[0], 200, 'OK');
         }),
-        catchError((err) => {
-          let resp = new ResponseDTO<any>(err, 500, 'Technical error occured while fethcing user data');
-          console.error(resp.message, err);
-          return of (resp);
+        catchError((err: TechnicalError | BusinessError) => {
+          console.error('SOMETHING WENT WRONG IN: UserService.getByEmailAndPassword', [err]);
+          if (err instanceof HttpErrorResponse) {
+            throw new TechnicalError('HTTP ERROR', 500);
+          }
+          return throwError(() => err);
         })
       );
   }
