@@ -12,7 +12,6 @@ export class HomeProfileComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.currentUser = this.authService.getLoggedInUser();
   }
 
 }

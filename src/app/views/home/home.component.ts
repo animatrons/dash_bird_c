@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.log('auth state changed ', authState);
         this.isSignedIn = authState;
         if (authState) {
-          this.currentUser = this.authService.getLoggedInUser();
         }
       })
   }

@@ -37,29 +37,7 @@ export class AuthService {
   }
 
   logOut() {
-    this.loggedInUser = new User();
-    this.changeAuthState(false);
     this.destroyToken();
-  }
-
-  isUserLoggedIn() {
-    return this.onAuthStateChange();
-  }
-
-  userISloggedIn() {
-    return this.loggedInUser.email != '';
-  }
-
-  changeAuthState(isLoggedIn: boolean) {
-    this.isLoggedInSource.next(isLoggedIn);
-  }
-
-  onAuthStateChange() {
-    return this.isLoggedInCurrent.pipe(share());
-  }
-
-  getLoggedInUser() {
-    return this.loggedInUser;
   }
 
   setToken(token: string) {
