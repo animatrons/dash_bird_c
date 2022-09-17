@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Alert, AlertTypes } from 'src/app/core/models/Alert';
 import { AlertService } from 'src/app/core/utils/alert.service';
+
+// TODO: create another alert component with different template and styles that uses a seperate instance of alert service from the one this component uses
 
 @Component({
   selector: 'app-alert',
@@ -9,10 +11,7 @@ import { AlertService } from 'src/app/core/utils/alert.service';
   styleUrls: ['./alert.component.sass'],
   host: {'class': 'toast-container position-fixed bottom-0 end-0 p-3', 'style': 'z-index: 1200'}
 })
-export class AlertComponent implements OnInit {
-  @Input() id = 'default-alert';
-  @Input() fade = true;
-
+export class AlertComponent implements OnInit, OnDestroy {
   alerts: Alert[] = [];
   alertSubscription!: Subscription;
   routeSubscription!: Subscription;
@@ -22,18 +21,23 @@ export class AlertComponent implements OnInit {
 
   ngOnInit(): void {
     this.alertSubscription = this.alertService.onAlert()
-      .subscribe(alert => {
-        if (!alert.message) {
-          // filter out alerts without 'keepAfterRouteChange' flag
-          this.alerts = this.alerts.filter(x => x.keepAfterRouteChange);
-          // remove 'keepAfterRouteChange' flag on the rest
-          this.alerts.forEach(x => delete x.keepAfterRouteChange);
-          return;
-        }
-        const header = this.getAlertStyle(alert)[1];
-        alert.title = alert.title ? header + ' ' + alert.title : header;
-        this.alerts.push(alert);
-      })
+    .subscribe(alert => {
+      if (!alert.message) {
+        // filter out alerts without 'keepAfterRouteChange' flag
+        this.alerts = this.alerts.filter(x => x.keepAfterRouteChange);
+        // remove 'keepAfterRouteChange' flag on the rest
+        this.alerts.forEach(x => delete x.keepAfterRouteChange);
+        return;
+      }
+      const header = this.getAlertStyle(alert)[1];
+      alert.title = alert.title ? header + '   ' + alert.title : header;
+      this.alerts.push(alert);
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.alertSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
   }
 
   removeAlert(alert: Alert) {
@@ -54,9 +58,9 @@ export class AlertComponent implements OnInit {
     const alertTypeClassAndHeader: {[key in AlertTypes]: string[]} = {
       [AlertTypes.Success]: ['bg-success text-light', '👍'],
       [AlertTypes.Danger]: ['bg-danger text-light', '💥'],
-      [AlertTypes.Info]: ['', 'ℹ️'],
+      [AlertTypes.Info]: ['text-bg-info', 'ℹ️'],
       [AlertTypes.Warn]: ['bg-warning text-light', '❗'],
-      [AlertTypes.Loading]: ['', '⏳'],
+      [AlertTypes.Loading]: ['text-bg-secondary', '⏳'],
     }
     return alertTypeClassAndHeader[alert.type];
   }

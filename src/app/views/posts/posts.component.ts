@@ -27,11 +27,6 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     // dispatch the Get Posts action
     this.store.dispatch(PostsActions.getPosts());
-    this.loadStatus$.subscribe(status => {
-      if (status === 'LOADED') {
-        this.alertService.success('Posts loaded', {title: 'ok', autoClose: true, delay: 10000})
-      }
-    })
   }
 
 }

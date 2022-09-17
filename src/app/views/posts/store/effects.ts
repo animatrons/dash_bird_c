@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { catchError, filter, map, mergeMap, of } from "rxjs";
+import { catchError, filter, map, mergeMap, of, share, startWith, tap } from "rxjs";
 import { TechnicalError } from "src/app/core/models/Error";
 import { AppState } from 'src/app/store/index';
 import { PostsService } from "../service/posts.service";
 import * as PostsActions from "./actions";
 import { fromPosts } from "./selectors";
 import { TimeService } from "../../../core/utils/time.service";
+import { AlertService } from "src/app/core/utils/alert.service";
 
 @Injectable()
 export class PostsEffects {
@@ -29,7 +30,11 @@ export class PostsEffects {
     return this.action$.pipe(
       ofType(PostsActions.loadPosts),
       mergeMap(() => {
-        return this.postsService.loadAll()
+        let loadAll$ = this.postsService.loadAll().pipe(share());
+        let autoCloseLoading$ = loadAll$.pipe(startWith(false), map(() => true), catchError(() => of(true)));
+
+        this.alertService.loading('Getting you the posts', autoCloseLoading$, {title: 'Be patient'});
+        return loadAll$
           .pipe(
             map((posts) => PostsActions.loadPostsSuccess({ posts })),
             catchError((error) =>
@@ -40,6 +45,23 @@ export class PostsEffects {
     )
   });
 
+  loadPoastsSuccess$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(PostsActions.loadPostsSuccess),
+      tap((posts) => this.alertService.success(`${posts.posts.length} were loaded with success`, {title: 'Loading success'}))
+    )},
+    { dispatch: false }
+  );
+
+  loadPoastsFailed$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(PostsActions.loadPostsFailure),
+      tap(() => this.alertService.danger('MAN SOMETHISNg REALY BAD HAPPEDNED HURRY UP YOU ARE IN DANGER'))
+    )},
+    { dispatch: false }
+  );
+
   constructor(private action$: Actions, private postsService: PostsService,
-    private store: Store<AppState>, private timeUtils: TimeService) {}
+    private store: Store<AppState>, private timeUtils: TimeService,
+    private alertService: AlertService) {}
 }

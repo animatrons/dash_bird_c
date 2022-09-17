@@ -7,11 +7,10 @@
     [animation]="true"
     (hidden)="removeAlert(alert)"
     >
-    <div class="spinner-border inline mx-2" role="status">
-      <!-- {{ alert.message }} -->
-    </div>
-    <span class="">{{ alert.message }}</span>
+    <div class="spinner-border inline mx-2" role="status"></div>
+    <span class="py-2">{{ alert.message }}</span>
   </ngb-toast>
+
   <ngb-toast *ngIf="!alert.autoClose && !alert.loading"
     [header]="alert.title || 'toad'"
     [class]="cssClass(alert)"
