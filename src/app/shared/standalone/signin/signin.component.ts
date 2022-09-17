@@ -25,19 +25,19 @@ export class SigninComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('User credentials submitted: ', this.user);
-    this.loadingState();
-    this.authService.login_(this.user.email, this.user.password).subscribe({
-      next: (user) => {
-        console.log('Welcome back sir/madame: ', user);
-        this.initState();
-        this.router.navigate(['']);
-      },
-      error: (err) => {
-        console.error('Identity unregistered, invalid or rejcted');
-        this.errorState();
-      },
-    });
+    // console.log('User credentials submitted: ', this.user);
+    // this.loadingState();
+    // this.authService.login_(this.user.email, this.user.password).subscribe({
+    //   next: (user) => {
+    //     console.log('Welcome back sir/madame: ', user);
+    //     this.initState();
+    //     this.router.navigate(['']);
+    //   },
+    //   error: (err) => {
+    //     console.error('Identity unregistered, invalid or rejcted');
+    //     this.errorState();
+    //   },
+    // });
   }
 
   initState() {

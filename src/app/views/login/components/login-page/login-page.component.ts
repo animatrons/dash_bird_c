@@ -7,15 +7,9 @@ import { User } from 'src/app/core/models/User';
   styleUrls: ['./login-page.component.sass']
 })
 export class LoginPageComponent implements OnInit {
-  user: User = new User();
-
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  onSubmit() {
-
   }
 
 }
