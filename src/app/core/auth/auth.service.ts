@@ -8,11 +8,7 @@ import { UserService } from '../services/user.service';
 
 @Injectable()
 export class AuthService {
-  private loggedInUser: User = new User();
   private TOKEN_STORAGE_KEY = 'access_token';
-
-  private isLoggedInSource = new BehaviorSubject<boolean>(false);
-  public isLoggedInCurrent = this.isLoggedInSource.asObservable();
 
   constructor
     (

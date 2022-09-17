@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/core/auth/auth.service';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+
 import { User } from 'src/app/core/models/User';
+import { AppState } from 'src/app/store';
 
 @Component({
   selector: 'app-home',
@@ -10,27 +12,18 @@ import { User } from 'src/app/core/models/User';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   isSignedIn: boolean = false;
-  currentUser: User = new User();
-  authSub: Subscription = new Subscription;
-  constructor
-    (
-      private authService: AuthService
-    ) { }
+
+  loginStatus$: Observable<"NOT_LOGGED_IN" | "LOGIN_IN" | "LOGGED_IN"> = new Observable();
+
+  constructor(private store: Store<AppState>) {
+  }
 
   ngOnInit(): void {
     console.log('Home init');
-    this.authSub = this.authService.isLoggedInCurrent
-      .subscribe(authState => {
-        console.log('auth state changed ', authState);
-        this.isSignedIn = authState;
-        if (authState) {
-        }
-      })
   }
 
   ngOnDestroy(): void {
     console.log('Home gone');
-    this.authSub.unsubscribe();
   }
 
 }
