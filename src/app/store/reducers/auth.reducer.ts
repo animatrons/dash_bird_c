@@ -7,19 +7,32 @@ export const authFeatureKey = 'auth';
 
 export interface State {
   user: User | null;
-  loginStatus: "NOT_LOGGED_IN" | "LOGIN_IN" | "LOGGED_IN";
+  loginStatus: 'NOT_LOGGED_IN' | 'LOGIN_IN' | 'LOGGED_IN';
   error: TechnicalError | BusinessError | null;
 }
 
 export const initialState: State = {
   user: null,
-  loginStatus: "NOT_LOGGED_IN",
+  loginStatus: 'NOT_LOGGED_IN',
   error: null,
 };
 
 export const reducer = createReducer(
   initialState,
-  on(AuthActions.userAuth, state => state),
-  on(AuthActions.userAuthSuccess, (state, action) => state),
-  on(AuthActions.userAuthFailure, (state, action) => state),
+  on(AuthActions.userAuth, (state) => ({
+    ...state,
+    loginStatus: 'LOGIN_IN'
+  })),
+  on(AuthActions.userAuthSuccess, (state, action) => ({
+    ...state,
+    loginStatus: 'LOGGED_IN',
+    user: action.user,
+    error: null
+  })),
+  on(AuthActions.userAuthFailure, (state, action) => ({
+    ...state,
+    loginStatus: 'NOT_LOGGED_IN',
+    user: null,
+    error: action.error
+  })),
 );
