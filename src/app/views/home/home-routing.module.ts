@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { HomeProfileComponent } from './components/home-profile/home-profile.component';
 import { AuthGuard } from "../../core/guards/auth.guard";
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { LoginPageComponent } from '../login/components/login-page/login-page.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        loadChildren: () => import('../login/login.module').then(c => c.LoginModule)
+        component: LoginPageComponent
       },
       {
         path: 'about',
