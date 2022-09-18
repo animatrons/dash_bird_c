@@ -60,7 +60,22 @@
       <!-- <div class="h-100 bg-light rounded-3 p-5">
 
       </div> -->
-      <app-login-petit [h_100]="true" class="h-100"></app-login-petit>
+      <app-login-petit *ngIf="(loginStatus$ | async) !== 'LOGGED_IN' else niceShirt" [h_100]="true" class="h-100"></app-login-petit>
+      <ng-template #niceShirt>
+        <div class="h-100 bg-light rounded-3 p-5">
+          <h2>So you're in, now what?</h2>
+          <p class="pb-1">
+            Man have you seen the news lately? It is CRAZY! no one expected this to happen, who would have thought that any of it was possible?
+            Oh and this is just the begining...
+          </p>
+          <p>
+            Anyway stay tuned.
+          </p>
+          <button class="btn btn-outline-light">
+            GO HOME
+          </button>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
