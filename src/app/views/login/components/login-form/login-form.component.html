@@ -2,10 +2,10 @@
   <form #myForm="ngForm" (ngSubmit)="onSubmit()" >
     <h1 class="h3 mb-3">Please sign in</h1>
     <fieldset [disabled]="(loadingStatus$ | async) === 'LOGIN_IN'">
-      <small id="passwordHelp" class="text-danger" *ngIf="error$ | async as error">
-        {{ error.message }}
+      <small id="passwordHelp" class="text-danger" *ngIf="(error$ | async)?.is">
+        {{ (error$ | async)?.message }}
       </small>
-      <div class="form-floating">
+      <div class="form-floating mt-3">
         <input type="email" [(ngModel)]="user.email" name="emailFormControl"
           required class="form-control form-signin-email" id="floatingInput"
           placeholder="name@example.com">

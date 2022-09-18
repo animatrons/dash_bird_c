@@ -15,13 +15,13 @@ import * as AuthActions from "../../../../store/actions/auth.actions";
 export class LoginFormComponent implements OnInit {
   user: User = new User();
   loadingStatus$: Observable<'NOT_LOGGED_IN' | 'LOGIN_IN' | 'LOGGED_IN'> = new Observable();
-  error$: Observable<{message: string} | null> = new Observable();
+  error$: Observable<{message: string, is: boolean} | null> = new Observable();
 
   constructor(private store: Store<AppState>) {
     this.loadingStatus$ = store.pipe(select(fromAuth.selectLoadingStatus));
     this.error$ = store.pipe<TechnicalError | BusinessError | null>(select(fromAuth.selectError))
       .pipe(
-        map((err) => ({message: err?.code === 403 ? 'Wrong email or password' : 'UNKOWN ERROR'}))
+        map((err) => ({message: err?.code === 403 ? 'Wrong email or password' : 'UNKOWN ERROR', is: err ? true : false}))
       );
   }
 
