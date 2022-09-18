@@ -19,4 +19,12 @@ export const userAuthFailure = createAction(
 
 export const userLogOut = createAction(
   '[Auth] User Log Out'
-)
+);
+
+export const userLogOutSuccess = createAction(
+  '[Auth] User Log Out Success'
+);
+
+export const userLogOutFailure = createAction(
+  '[Auth] User Log Out Failure'
+);
