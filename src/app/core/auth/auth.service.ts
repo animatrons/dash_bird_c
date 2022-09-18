@@ -36,6 +36,7 @@ export class AuthService {
     let logOut$ = new Observable(() => {
       this.destroyToken();
     })
+    logOut$  = of (this.destroyToken());
     return logOut$;
   }
 
